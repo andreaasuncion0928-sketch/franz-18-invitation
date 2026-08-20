@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Franz @18 — A Special Invitation</title>
+    
+    <!-- Google Fonts: Piazzolla (Serif) & Poppins (Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,wght@0,300;0,400;0,500;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================================
+           CSS VARIABLES & COLOR PALETTE
+           ========================================================= */
+        :root {
+            --bg-ivory: #FAF8F5;
+            --bg-white: #FFFFFF;
+            --lavender-main: #D4C6E1;
+            --lavender-muted: #B9A7C9;
+            --lavender-accent: #CB6CE6;
+            --text-plum: #3F3445;
+            --text-mauve: #806F82;
+        }
+
+        /* =========================================================
+           GLOBAL RESET & TYPOGRAPHY
+           ========================================================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-ivory);
+            /* Subtle paper noise texture overlay */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            color: var(--text-plum);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Piazzolla', serif;
+            font-weight: 400;
+            color: var(--text-plum);
+        }
+
+        .tiny-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-mauve);
+        }
+
+        /* =========================================================
+           LAYOUT & SCREENS (INTERACTION DESIGN)
+           ========================================================= */
+        #app-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(15px);
+            animation: softFadeIn 0.8s forwards ease-out;
+            position: relative;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes softFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================================
+           BUTTONS & LINKS
+           ========================================================= */
+        button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-plum);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--lavender-main);
+            padding: 0.75rem 2rem;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-plum);
+            background-color: var(--bg-ivory);
+            transition: all 0.4s ease;
+            margin-top: 2rem;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--lavender-muted);
+            background-color: var(--bg-white);
+            color: var(--lavender-accent);
+        }
+
+        .btn-back {
+            margin-top: 4rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-mauve);
+            transition: color 0.3s ease;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+        }
+
+        .btn-back:hover {
+            color: var(--text-plum);
+            border-color: var(--lavender-main);
+        }
+
+        /* =========================================================
+           SPECIFIC SCREEN STYLES
+           ========================================================= */
+        
+        /* PAGE 1: COVER */
+        .cover-h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            letter-spacing: 0.1em;
+            margin: 1rem 0 0 0;
+        }
+        
+        .cover-18 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--lavender-muted);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .thin-rule {
+            width: 40px;
+            height: 1px;
+            background-color: var(--lavender-main);
+            margin: 2rem auto;
+        }
+
+        /* PAGE 2: MENU */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            width: 100%;
+            margin-top: 3rem;
+        }
+
+        .menu-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--bg-white);
+            padding: 2.5rem 2rem;
+            text-align: left;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(63, 52, 69, 0.02);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card:hover {
+            border-color: var(--lavender-main);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(63, 52, 69, 0.05);
+        }
+
+        .menu-card .number {
+            font-family: 'Piazzolla', serif;
+            font-size: 1.25rem;
+            color: var(--lavender-muted);
+            margin-bottom: 1rem;
+        }
+
+        .menu-card h3 {
+            font-size: 1.1rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card p {
+            font-size: 0.8rem;
+            color: var(--text-mauve);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .menu-card .open-link {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            color: var(--text-plum);
+            text-transform: uppercase;
+        }
+
+        .menu-card:hover .open-link {
+            color: var(--lavender-accent);
+        }
+
+        /* SUBPAGES */
+        .page-heading {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin: 0.5rem 0 2rem 0;
+            letter-spacing: 0.05em;
+        }
+
+        .content-block {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .statement {
+            font-family: 'Piazzolla', serif;
+            font-size: 2rem;
+            color: var(--lavender-muted);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .qr-placeholder {
+            width: 180px;
+            height: 180px;
+            border: 1px solid var(--lavender-main);
+            margin: 2rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-white);
+            color: var(--text-mauve);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* =========================================================
+           BOTANICAL ILLUSTRATIONS (SVG)
+           ========================================================= */
+        .floral-accent {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .iris-large {
+            width: 350px;
+            bottom: -50px;
+            right: -80px;
+        }
+
+        .iris-small {
+            width: 120px;
+            top: -20px;
+            left: -20px;
+        }
+        
+        .botanical-sprig {
+            width: 80px;
+            margin: 0 auto 1.5rem auto;
+            display: block;
+        }
+
+        /* =========================================================
+           MOBILE RESPONSIVENESS
+           ========================================================= */
+        @media (max-width: 768px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            .iris-large {
+                width: 250px;
+                right: -50px;
+                bottom: -20px;
+            }
+            #app-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <!-- ==========================================
+             SCREEN 1: OPENING / COVER
+             ========================================== -->
+        <section id="screen-cover" class="screen active">
+            <!-- Decorative SVG Iris -->
+            <svg class="floral-accent iris-large" viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M120 280 C110 200, 130 150, 100 80" stroke="var(--lavender-muted)" stroke-width="1.5" fill="none"/>
+                <path d="M100 80 C70 60, 60 100, 90 120 C100 130, 110 100, 100 80" stroke="var(--lavender-main)" stroke-width="1.5" fill="none"/>
+                <path d="M100 80 C130 50, 150 90, 110 110 C100 120, 90 90, 100 80" stroke="var(--lavender-main)" stroke-width="1.5" fill="none"/>
+                <path d="M100 80 C110 30, 80 20, 95 60" stroke="var(--lavender-main)" stroke-width="1.5" fill="none"/>
+                <path d="M110 160 C140 150, 150 180, 115 190" stroke="var(--lavender-muted)" stroke-width="1" fill="none"/>
+            </svg>
+
+            <div class="tiny-label">A Special Invitation</div>
+            <h1 class="cover-h1">FRANZ</h1>
+            <div class="cover-18">18</div>
+            <div class="tiny-label" style="color: var(--text-plum);">September 27, 2026</div>
+            
+            <div class="thin-rule"></div>
+            
+            <p style="font-style: italic; color: var(--text-mauve); font-size: 0.9rem;">A little something to open.</p>
+            
+            <button class="btn-outline" onclick="navTo('screen-menu')">Open Invitation &rarr;</button>
+        </section>
+
+        <!-- ==========================================
+             SCREEN 2: MAIN MENU
+             ========================================== -->
+        <section id="screen-menu" class="screen">
+            <svg class="floral-accent iris-small" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 140 C45 100, 55 75, 40 40" stroke="var(--lavender-muted)" stroke-width="1" fill="none"/>
+                <path d="M40 40 C25 30, 20 50, 35 60 C40 65, 45 50, 40 40" stroke="var(--lavender-main)" stroke-width="1" fill="none"/>
+                <path d="M40 40 C55 25, 65 45, 45 55" stroke="var(--lavender-main)" stroke-width="1" fill="none"/>
+            </svg>
+
+            <div class="tiny-label" style="margin-bottom: 0.5rem;">Everything you need for the evening.</div>
+            <h2 class="page-heading">A FEW THINGS TO KNOW</h2>
+            
+            <div class="menu-grid">
+                <!-- Option 01 -->
+                <div class="menu-card" onclick="navTo('screen-when-where')">
+                    <div class="number">01</div>
+                    <h3>WHEN & WHERE</h3>
+                    <p>The details of the evening.</p>
+                    <div class="open-link">Open &rarr;</div>
+                </div>
+                <!-- Option 02 -->
+                <div class="menu-card" onclick="navTo('screen-what-to-wear')">
+                    <div class="number">02</div>
+                    <h3>WHAT TO WEAR</h3>
+                    <p>A little note on the dress code.</p>
+                    <div class="open-link">Open &rarr;</div>
+                </div>
+                <!-- Option 03 -->
+                <div class="menu-card" onclick="navTo('screen-18-roses')">
+                    <div class="number">03</div>
+                    <h3>18 ROSES</h3>
+                    <p>For those sharing a special moment with Franz.</p>
+                    <div class="open-link">Open &rarr;</div>
+                </div>
+                <!-- Option 04 -->
+                <div class="menu-card" onclick="navTo('screen-rsvp')">
+                    <div class="number">04</div>
+                    <h3>RSVP</h3>
+                    <p>Save your place.</p>
+                    <div class="open-link">Open &rarr;</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SCREEN 3: WHEN & WHERE
+             ========================================== -->
+        <section id="screen-when-where" class="screen">
+            <!-- Small Sprig -->
+            <svg class="botanical-sprig" viewBox="0 0 50 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25 90 C20 60, 30 40, 25 10" stroke="var(--lavender-muted)" stroke-width="1" fill="none"/>
+                <circle cx="25" cy="10" r="2" fill="var(--lavender-main)"/>
+                <circle cx="20" cy="30" r="1.5" fill="var(--lavender-main)"/>
+                <circle cx="32" cy="50" r="1.5" fill="var(--lavender-main)"/>
+            </svg>
+
+            <div class="tiny-label">The Details</div>
+            <h2 class="page-heading">A NOTE ABOUT THE EVENING</h2>
+            
+            <div class="content-block">
+                <h3 class="tiny-label" style="color: var(--lavender-accent); margin-bottom: 0.5rem;">When</h3>
+                <p style="margin-bottom: 2rem;">September 27, 2026<br>7:00 PM</p>
+                
+                <h3 class="tiny-label" style="color: var(--lavender-accent); margin-bottom: 0.5rem;">Where</h3>
+                <p class="serif" style="font-size: 1.2rem; margin-bottom: 0.2rem;">[INSERT VENUE NAME]</p>
+                <p style="color: var(--text-mauve); font-size: 0.9rem; margin-bottom: 2rem;">[INSERT COMPLETE VENUE ADDRESS]</p>
+                
+                <button class="btn-outline" onclick="window.open('#', '_blank')">View Location &rarr;</button>
+            </div>
+            
+            <button class="btn-back" onclick="navTo('screen-menu')">&larr; Back to Details</button>
+        </section>
+
+        <!-- ==========================================
+             SCREEN 4: WHAT TO WEAR
+             ========================================== -->
+        <section id="screen-what-to-wear" class="screen">
+            <div class="tiny-label">Strict Dress Code</div>
+            <h2 class="page-heading">A LITTLE NOTE ON WHAT TO WEAR</h2>
+            
+            <div class="content-block">
+                <div class="statement">WHITE, PLEASE.</div>
+                
+                <p style="font-weight: 500; margin-bottom: 1.5rem;">Keep your main outfit white.</p>
+                
+                <p style="font-size: 0.9rem; color: var(--text-mauve); margin-bottom: 1rem;">Formal or semi-formal attire is encouraged. Examples include:</p>
+                
+                <ul style="list-style: none; font-size: 0.9rem; color: var(--text-mauve); margin-bottom: 2rem; font-style: italic;">
+                    <li>White dress</li>
+                    <li>White long-sleeved shirt</li>
+                    <li>White formal/semi-formal top</li>
+                    <li>White formal or semi-formal outfit</li>
+                </ul>
+
+                <div class="thin-rule"></div>
+
+                <p style="font-size: 0.85rem; margin-bottom: 1rem;">Pants, skirts, shoes, and accessories may be any color — just keep white as the main outfit color.</p>
+                
+                <p style="font-size: 0.85rem; color: var(--lavender-accent); font-weight: 500;">Please do not use purple as the main outfit color.</p>
+            </div>
+
+            <button class="btn-back" onclick="navTo('screen-menu')">&larr; Back to Details</button>
+        </section>
+
+        <!-- ==========================================
+             SCREEN 5: 18 ROSES
+             ========================================== -->
+        <section id="screen-18-roses" class="screen">
+            <svg class="botanical-sprig" viewBox="0 0 50 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M25 90 C30 60, 20 40, 25 10" stroke="var(--lavender-muted)" stroke-width="1" fill="none"/>
+                <path d="M25 10 C15 5, 10 20, 25 25 C40 20, 35 5, 25 10" stroke="var(--lavender-main)" stroke-width="1" fill="none"/>
+            </svg>
+
+            <div class="tiny-label">A Special Note For You</div>
+            <h2 class="page-heading">18 ROSES</h2>
+            
+            <div class="content-block">
+                <p class="serif" style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--text-mauve);">For those sharing a special moment with Franz.</p>
+                <p style="font-size: 0.9rem; margin-bottom: 2rem;">You have a special part in Franz's evening.<br>For your dance with Franz, here's everything you need to know.</p>
+                
+                <!-- This link can be modified later to point to the personalized URL -->
+                <button class="btn-outline" onclick="window.open('#', '_blank')">View Your Instructions &rarr;</button>
+            </div>
+
+            <button class="btn-back" onclick="navTo('screen-menu')">&larr; Back to Details</button>
+        </section>
+
+        <!-- ==========================================
+             SCREEN 6: RSVP
+             ========================================== -->
+        <section id="screen-rsvp" class="screen">
+            <div class="tiny-label">One Last Thing</div>
+            <h2 class="page-heading">WILL YOU BE THERE?</h2>
+            
+            <div class="content-block">
+                <p style="color: var(--text-mauve); font-size: 0.95rem;">We'd love to celebrate with you.</p>
+                
+                <!-- Placeholder for the QR Code -->
+                <div class="qr-placeholder">
+                    [ QR CODE ]
+                </div>
+                
+                <!-- Add the RSVP Link here later -->
+                <button class="btn-outline" onclick="window.open('#', '_blank')" style="margin-top: 0;">Confirm Your Attendance &rarr;</button>
+                
+                <p style="margin-top: 1.5rem; font-size: 0.8rem; font-family: 'Piazzolla', serif; font-style: italic; color: var(--text-mauve);">
+                    RSVP by [INSERT RSVP DEADLINE]
+                </p>
+            </div>
+
+            <button class="btn-back" onclick="navTo('screen-menu')">&larr; Back to Details</button>
+        </section>
+
+    </div>
+
+    <!-- ==========================================
+         JAVASCRIPT / INTERACTION LOGIC
+         ========================================== -->
+    <script>
+        /**
+         * Simple navigation function to handle the click-to-open experience.
+         * Hides all screens and softly fades in the target screen.
+         */
+        function navTo(targetScreenId) {
+            // Get all screens
+            const screens = document.querySelectorAll('.screen');
+            
+            // Remove active class to hide them
+            screens.forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Add active class to target screen and scroll to top
+            const target = document.getElementById(targetScreenId);
+            if(target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
