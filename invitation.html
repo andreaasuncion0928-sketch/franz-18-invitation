@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franz @ 18</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:ital,wght@0,500;1,500&display=swap');
+  
+  body { 
+    margin: 0; 
+    background: #FDFBF7; 
+    color: #4A375A; 
+    font-family: 'Lato', sans-serif; 
+    overflow: hidden; 
+  }
+  
+  h1, h2 { 
+    font-family: 'Playfair Display', serif; 
+    font-weight: 500; 
+    margin-bottom: 10px;
+  }
+  
+  .screen { 
+    display: none; 
+    height: 100vh; 
+    width: 100vw; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    padding: 20px; 
+    box-sizing: border-box; 
+    animation: fadeIn 1s forwards; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+  }
+  
+  .active { display: flex; }
+  
+  @keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+  }
+  
+  .btn { 
+    background: #E6E6FA; 
+    color: #4A375A; 
+    border: 1px solid #D4AF37; 
+    padding: 12px 24px; 
+    font-size: 16px; 
+    font-family: 'Lato', sans-serif; 
+    cursor: pointer; 
+    margin-top: 30px; 
+    border-radius: 25px; 
+    transition: 0.3s; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+    z-index: 10;
+  }
+  
+  .btn:hover { 
+    background: #D4AF37; 
+    color: #FDFBF7; 
+  }
+  
+  .firefly { 
+    position: absolute; 
+    width: 4px; 
+    height: 4px; 
+    background: #D4AF37; 
+    border-radius: 50%; 
+    box-shadow: 0 0 10px #D4AF37; 
+    animation: float 4s infinite alternate; 
+    z-index: 1;
+  }
+  
+  .lamp { 
+    width: 80px; 
+    margin-bottom: 20px; 
+    filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.7)); 
+    z-index: 10;
+  }
+  
+  .details-text { 
+    font-size: 17px; 
+    line-height: 1.6; 
+    max-width: 400px; 
+    margin: 0 auto; 
+    z-index: 10;
+  }
+  
+  .small-text { 
+    font-size: 14px; 
+    opacity: 0.8; 
+  }
+  
+  .audio-control { 
+    position: fixed; 
+    top: 20px; 
+    right: 20px; 
+    z-index: 100; 
+    cursor: pointer; 
+    font-size: 24px; 
+  }
+  
+  .rose-section { 
+    text-align: left; 
+    background: rgba(230, 230, 250, 0.3); 
+    padding: 25px; 
+    border-radius: 12px; 
+    border-left: 3px solid #D4AF37; 
+    margin-top: 20px; 
+  }
+</style>
+</head>
+<body>
+
+<div class="audio-control" id="audio-btn" style="display:none;" onclick="toggleAudio()">🔊</div>
+<!-- The audio source is now set to your chosen song -->
+<audio id="bg-music" loop>
+  <source src="every-breath-you-take.mp3" type="audio/mpeg">
+</audio>
+
+<div id="screen-1" class="screen active">
+  <svg class="lamp" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <path d="M32 2 L22 20 L24 40 L18 42 L18 46 L46 46 L46 42 L40 40 L42 20 Z" fill="none" stroke="#4A375A" stroke-width="1.5"/>
+    <line x1="32" y1="2" x2="32" y2="46" stroke="#4A375A" stroke-width="1"/>
+    <rect x="26" y="46" width="12" height="16" fill="none" stroke="#4A375A" stroke-width="1.5"/>
+    <circle cx="32" cy="30" r="7" fill="#D4AF37" opacity="0.9" filter="blur(3px)"/>
+  </svg>
+  <h1>Franz @ 18</h1>
+  <p class="details-text">a luminous nostalgia.</p>
+  <button class="btn" onclick="nextScreen(2)">Let's Get Lit (The Lamps, Obviously)</button>
+</div>
+
+<div id="screen-2" class="screen">
+  <h2>When & Where</h2>
+  <p class="details-text">
+    <strong>SEPTEMBER 27, 2026</strong><br>
+    7:00 PM<br><br>
+    <strong>[Venue]</strong><br>
+    <span class="small-text">Full address details here</span>
+  </p>
+  <button class="btn" onclick="nextScreen(3)">But What Do I Wear?</button>
+</div>
+
+<div id="screen-3" class="screen">
+  <h2>Dress Code</h2>
+  <p class="details-text">
+    <strong>WHITE · FORMAL / SEMI-FORMAL</strong><br><br>
+    Keep your main outfit white.<br>
+    <span class="small-text">Let's keep the aesthetic elegant and bright.</span>
+  </p>
+  <button class="btn" onclick="nextScreen(4)">A Special Note For You...</button>
+</div>
+
+<div id="screen-4" class="screen">
+  <h2>18 Roses</h2>
+  <div class="details-text rose-section">
+    <p><em>oh, this one’s for you.</em></p>
+    <p>You’re part of my 18 Roses, and I’m really happy you’ll be sharing this moment with me. 🤍</p>
+    <hr style="border:0; border-top:1px solid #D4AF37; margin:15px 0;">
+    <p class="small-text"><strong>01 · PICK A SONG</strong><br>one song that feels like us.</p>
+    <p class="small-text"><strong>02 · TELL ME WHY</strong><br>2–3 natural sentences. Sweet, funny, nostalgic — anything goes.</p>
+    <p class="small-text"><strong>03 · SEND ME</strong><br>your name · Song + Artist · why you chose it</p>
+    <p style="font-size: 13px; font-style:italic; margin-bottom: 0;">I’ll hear your message while we dance.</p>
+  </div>
+  <button class="btn" onclick="alert('This button will link directly to your RSVP Form!')">Send Me Your Song</button>
+</div>
+
+<script>
+  for(let i=0; i<18; i++) {
+    let firefly = document.createElement('div');
+    firefly.className = 'firefly';
+    firefly.style.left = Math.random() * 100 + 'vw';
+    firefly.style.top = Math.random() * 100 + 'vh';
+    firefly.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    firefly.style.animationDelay = (Math.random() * 2) + 's';
+    document.body.appendChild(firefly);
+  }
+
+  const music = document.getElementById('bg-music');
+  const audioBtn = document.getElementById('audio-btn');
+
+  function nextScreen(num) {
+    if(num === 2) {
+      music.play().catch(() => console.log("Audio requires an actual MP3 file in the same folder."));
+      audioBtn.style.display = 'block';
+    }
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + num).classList.add('active');
+  }
+
+  function toggleAudio() {
+    if (music.paused) {
+      music.play();
+      audioBtn.innerHTML = '🔊';
+    } else {
+      music.pause();
+      audioBtn.innerHTML = '🔈';
+    }
+  }
+</script>
+</body>
+</html>
